@@ -4,42 +4,43 @@ import { isAllUnique } from "./helpers";
 
 export function getWordsFromMatrixForPoint(
   firstPoint: Point,
-  matrix: string[][]
+  matrix: string[][],
+  wordLength: number
 ): string[] {
-  const resultList: string[] = [];
-  const secondPoints: Point[] = calcSidePoins(firstPoint);
+  const resultList: Point[][] = [];
 
-  for (let secondPoint of secondPoints) {
-    const thirdPoints: Point[] = calcSidePoins(secondPoint);
+  processPoint(firstPoint, [firstPoint], resultList, wordLength, matrix);
 
-    for (let thirdPoint of thirdPoints) {
-      const forthPoints: Point[] = calcSidePoins(thirdPoint);
+  return resultList.map(item => pointsToLetters(item, matrix));
+}
 
-      for (let forthPoint of forthPoints) {
-        const fifthPoints: Point[] = calcSidePoins(forthPoint);
-
-        for (let fifthPoint of fifthPoints) {
-          const wordInPoints = [
-            firstPoint,
-            secondPoint,
-            thirdPoint,
-            forthPoint,
-            fifthPoint
-          ];
-
-          if (isAllUnique(wordInPoints)) {
-            resultList.push(pointsToLetters(wordInPoints, matrix));
-          }
-        }
-      }
+function processPoint(
+  point: Point,
+  prevPoints: Point[],
+  resultList: Point[][],
+  limit: number,
+  matrix: string[][]
+) {
+  if (prevPoints.length === limit) {
+    if (isAllUnique(prevPoints)) {
+      resultList.push(prevPoints);
+    }
+  } else {
+    const sidePoints: Point[] = calcSidePoins(point);
+    for (let sidePoint of sidePoints) {
+      processPoint(
+        sidePoint,
+        [...prevPoints, sidePoint],
+        resultList,
+        limit,
+        matrix
+      );
     }
   }
-
-  return resultList;
 }
 
 function pointsToLetters(points: Point[], matrix: string[][]): string {
-  return points.map(point => pointToLetter(point, matrix)).join('');
+  return points.map(point => pointToLetter(point, matrix)).join("");
 }
 
 function pointToLetter(point: Point, matrix: string[][]): string {

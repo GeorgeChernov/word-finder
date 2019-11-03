@@ -17,14 +17,16 @@ for (var x = 0; x < matrixSize; x++) {
   for (var y = 0; y < matrixSize; y++) {
     const wordsFromMatrix: string[] = getWordsFromMatrixForPoint(
       new Point(x, y),
-      matrix
+      matrix,
+      wordLength
     );
 
-    result = result.concat(getMatchedWords(wordsFromMatrix, wordsFromDictionary));
+    result = result.concat(
+      getMatchedWords(wordsFromMatrix, wordsFromDictionary)
+    );
   }
 }
 
 const finalResult = result.filter(onlyUnique);
-
 
 console.log(finalResult, finalResult.length);
