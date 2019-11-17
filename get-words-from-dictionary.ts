@@ -1,6 +1,9 @@
 import * as fs from "fs";
 
-export function getWordsFromDictionary(sourseName: string, numberOfLetters: number) {
+export function getWordsFromDictionary(
+  sourseName: string,
+  numberOfLetters: number
+) {
   const resultWords: string[] = [];
 
   var lines = fs
@@ -17,6 +20,9 @@ export function getWordsFromDictionary(sourseName: string, numberOfLetters: numb
   return resultWords;
 }
 
-function containsRequiredNumberOfLetters(word: string, numberOfLetters: number) {
+function containsRequiredNumberOfLetters(
+  word: string,
+  numberOfLetters: number
+) {
   return word.length === numberOfLetters;
 }

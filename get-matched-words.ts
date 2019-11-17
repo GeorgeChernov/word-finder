@@ -1,3 +1,5 @@
+var bs = require("binary-search");
+
 export function getMatchedWords(
   wordsFromMatrix: string[],
   wordsFromDictionary: string[]
@@ -5,12 +7,15 @@ export function getMatchedWords(
   const result: string[] = [];
 
   for (let matrixWord of wordsFromMatrix) {
-    const matchedWords = wordsFromDictionary.filter(
-      dictionaryWord => dictionaryWord === matrixWord.toLowerCase()
-    );
+    const matchedWordIndex = bs(wordsFromDictionary, matrixWord.toLowerCase(), function(
+      element,
+      needle
+    ) {
+      return element.localeCompare(needle);
+    });
 
-    if (matchedWords && matchedWords[0]) {
-      result.push(matchedWords[0]);
+    if (matchedWordIndex >= 0) {
+      result.push(wordsFromDictionary[matchedWordIndex]);
     }
   }
 
