@@ -10,9 +10,11 @@ function basePathAppender(fileName: string) {
   return basePath + fileName;
 }
 
-export async function processImage() {
+export async function convertImageToMatrix() {
   await normalizeImage(originalImage, basePathAppender);
-  const result = await recognize(basePathAppender(resultImage));
+  const result: Tesseract.RecognizeResult = await recognize(
+    basePathAppender(resultImage)
+  );
 
   return removeIncorrectCharacters(result.data.text);
 }

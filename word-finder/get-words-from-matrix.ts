@@ -5,7 +5,7 @@ import { getMatchedWords } from "./get-matched-words";
 import { getWordsFromDictionary } from "./get-words-from-dictionary";
 import { onlyUnique } from "./helpers";
 
-export function getWordsFromMatrix(matrix, wordLength: number) {
+export function getWordsFromMatrix(matrix: string[][], wordLength: number) {
   const start1: any = new Date();
   const wordsFromDictionary: string[] = getWordsFromDictionary(
     "dictionary.txt",

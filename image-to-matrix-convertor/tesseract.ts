@@ -1,6 +1,6 @@
 import * as Tesseract from "tesseract.js";
 
-export function recognize(inputImage) {
+export function recognize(inputImage): Promise<Tesseract.RecognizeResult> {
   const options = {
     lang: "rus",
     tessedit_char_whitelist: "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ",
