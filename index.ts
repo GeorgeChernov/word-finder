@@ -2,15 +2,15 @@ import { processImage } from "./image-to-matrix-convertor/index";
 import { getWordsFromMatrix } from "./get-words-from-matrix";
 
 async function main() {
-  //const start1: any = new Date();
-  const matrix = await processImage();
-  //const end1: any = new Date();
-  //console.log("processImage: %dms", end1 - start1);
+  const start1: any = new Date();
+  const matrix: string[][] = await processImage();
+  const end1: any = new Date();
+  console.log("processImage: %dms", end1 - start1);
 
-  //const start2: any = new Date();
+  const start2: any = new Date();
   const words = getWordsFromMatrix(matrix, 8);
-  //const end2: any = new Date();
-  //console.log("getWordsFromMatrix: %dms", end2 - start2);
+  const end2: any = new Date();
+  console.log("getWordsFromMatrix: %dms", end2 - start2);
 
   return words;
 }
