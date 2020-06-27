@@ -1,7 +1,7 @@
 import { matrixSize } from "./constants";
 import { getWordsFromMatrixForPoint } from "./get-words-from-matrix-for-point";
 import { Point } from "./point";
-import { getMatchedWords } from "./get-matched-words";
+import { getMatchedWords } from "./get-matched-words-binary";
 import { getWordsFromDictionary } from "./get-words-from-dictionary";
 import { onlyUnique } from "./helpers";
 
@@ -16,7 +16,7 @@ export function getWordsFromMatrix(matrix: string[][], wordLength: number) {
 
   const start2: any = new Date();
 
-  let allWordsFromMatrix: string[] = [];
+  let allLetterCombinationsFromMatrix: string[] = [];
 
   for (var x = 0; x < matrixSize; x++) {
     for (var y = 0; y < matrixSize; y++) {
@@ -26,7 +26,9 @@ export function getWordsFromMatrix(matrix: string[][], wordLength: number) {
         wordLength
       );
 
-      allWordsFromMatrix = allWordsFromMatrix.concat(wordsFromMatrix);
+      allLetterCombinationsFromMatrix = allLetterCombinationsFromMatrix.concat(
+        wordsFromMatrix
+      );
     }
   }
 
@@ -34,7 +36,10 @@ export function getWordsFromMatrix(matrix: string[][], wordLength: number) {
   console.log(" -- finding letter combinations in matrix: %dms", end2 - start2);
 
   const start3: any = new Date();
-  const matchedWords = getMatchedWords(allWordsFromMatrix, wordsFromDictionary);
+  const matchedWords = getMatchedWords(
+    allLetterCombinationsFromMatrix,
+    wordsFromDictionary
+  );
   const end3: any = new Date();
   console.log(" -- getMatchedWords: %dms", end3 - start3);
 
